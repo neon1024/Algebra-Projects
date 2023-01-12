@@ -8,20 +8,8 @@
 from backtracking import generate_vectors
 
 
-def generate_bases(vectors):
+def generate_bases(vectors, dimension):
 
-    dimension = len(vectors)
-
-    # for vector1 in vectors:
-    #     basis = [vector1]
-    #
-    #     for vector2 in vectors:
-    #         if vector1 != vector2:
-    #             basis.append(vector2)
-    #
-    #             print(basis)
-    #
-    #             basis.remove(vector2)
     for vector1 in vectors:
         basis = [vector1]
 
@@ -41,14 +29,18 @@ def generate_bases(vectors):
                                     if vector4 != vector3 and vector4 != vector2 and vector4 != vector1:
                                         basis.append(vector4)
 
-                                        print(basis)
+                                        # print(basis)
 
                                         basis.remove(vector4)
-                            else:
-                                print(basis)
+
                                 basis.remove(vector3)
+                            else:
+                                # print(basis)
+                                basis.remove(vector3)
+
+                    basis.remove(vector2)
                 else:
-                    print(basis)
+                    # print(basis)
                     basis.remove(vector2)
 
 
@@ -58,13 +50,15 @@ def main():
 
     n = int(input("n: "))
 
-    vectors = generate_vectors(n)
+    vectors = generate_vectors(n)  # generate_vectors() is located in backtracking.py
+
+    print(vectors)
 
     number_of_basis = (len(vectors) - 2) * (len(vectors) - 1)
 
     print(f"Number of basis: {number_of_basis}")
 
-    generate_bases(vectors[1:][:])
+    generate_bases(vectors[1:][:], n)
 
 
 if __name__ == "__main__":
